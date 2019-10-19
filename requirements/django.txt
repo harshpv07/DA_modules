@@ -1,0 +1,8 @@
+dicttoxml
+Django
+matplotlib
+numpy
+Pillow
+psycopg2
+pyparsing
+python-dateutil
