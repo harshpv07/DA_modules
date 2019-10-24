@@ -42,4 +42,3 @@ def createrepo(username,password,reponame,visibility,readme,desc):
         updatedb(username,password,project_url,project_nam_value)
 
     
-createrepo("harsh.pv07@gmail.com","h@r$h@123","test18",0,"d","jk")
