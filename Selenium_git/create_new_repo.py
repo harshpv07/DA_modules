@@ -1,9 +1,12 @@
+
+
 def createrepo(username,password,reponame,visibility,readme,desc):
     from selenium import webdriver
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support import expected_conditions as EC
     from main import drive
+    from mongo_cred import mongoprint,ins,updatedb
     #repo_name -> name of the repo
     #visibility -> public(1) or private(0)
     #readme
@@ -19,13 +22,24 @@ def createrepo(username,password,reponame,visibility,readme,desc):
     driver.find_element_by_xpath("//a[@class = 'btn btn-sm btn-primary text-white']").click()
     driver.find_element_by_xpath("//input[@name='repository[name]']").send_keys(reponame)
     driver.find_element_by_xpath("//input[@name='repository[description]']").send_keys(desc)
-    if(int(visibility) == 1): #public
+    if(int(visibility) == 1): #public  
         driver.find_element_by_xpath("//input[@name='repository[visibility]' and @id = 'repository_visibility_public']").click()
     elif(int(visibility) == 0): #private
         driver.find_element_by_xpath("//input[@name='repository[visibility]' and @id = 'repository_visibility_private']").click()
     driver.find_element_by_xpath("//input[@name='repository[auto_init]' and @id = 'repository_auto_init']").click()
     driver.find_element_by_xpath('//button[@type="submit" and @data-disable-with="Creating repository…"]').click()
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit" and @data-disable-with="Creating repository…"]'))).click()
+    
+
+    project_url = str(driver.current_url) + ".git"
+    project_nam = driver.find_element_by_xpath('//a[@data-pjax="#js-repo-pjax-container"]')
+    project_nam_value = str(project_nam.text)
+    print(project_nam_value)
+    if(bool(mongoprint(username,password)) == False):
+        ins(username,password,project_url,project_nam_value)
+    else:
+        print(mongoprint(username,password))
+        updatedb(username,password,project_url,project_nam_value)
 
     
-createrepo("","","heyy",1,"d","jk")
+createrepo("harsh.pv07@gmail.com","h@r$h@123","test18",0,"d","jk")
