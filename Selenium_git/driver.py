@@ -8,7 +8,7 @@ def git_push(commit_mess,path,username,password):
         if(i['names'] == path_split):
             os.system("cd "+path + " && git init" + " && git add ." + " && git commit -m " + commit_mess + " && git remote add origin " +i["projects"] + " && git push origin master")
 
-git_push("com","/home","harsh.pv07@gmail.com","h@r$h@123")
+
 
 #clone the remote repo
 def git_clone(path,repo_url):
