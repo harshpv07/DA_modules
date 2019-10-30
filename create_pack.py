@@ -33,7 +33,7 @@ def react(fold_name,venv,name,path):
         os.system("cd " + path + "&& mkdir " + fold_name + "&& cd " + fold_name)
         # venv_name = input("Enter the name of the venv: ")
         if(os.name != "nt"): #for ubuntu
-            os.system("cd " + path + " && cd " + fold_name + " && npm init react-app " + name )
+            os.system("cd " + path + " && cd " + fold_name + " && npx create-react-app " + name )
             print("VENV Sucessfully created and activated")
     else:
         print("Not created")
